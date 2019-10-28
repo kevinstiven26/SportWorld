@@ -31,7 +31,7 @@
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
                             <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                            <li class="list-inline-item"><a href="register.html">Register</a></li>
+                            <li class="list-inline-item"><a href="{{ route('register') }}">Register</a></li>
                             <li class="list-inline-item"><a href="">Contact</a></li>
                             <li class="list-inline-item"><a href="#">Recently viewed</a></li>
                         </ul>
@@ -46,19 +46,25 @@
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                         </div>
                         <div class="modal-body">
-                            <form action="customer-orders.html" method="post">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
                                 <div class="form-group">
-                                    <input id="email-modal" type="text" placeholder="email" class="form-control">
+                                    <input id="email" type="email" placeholder="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input id="password-modal" type="password" placeholder="password" class="form-control">
+                                    <input id="password" type="password" placeholder="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 </div>
                                 <p class="text-center">
-                                    <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i>{{ __('Login') }}</button>
                                 </p>
                             </form>
                             <p class="text-center text-muted">Not registered yet?</p>
-                            <p class="text-center text-muted"><a href="register.html"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                            <p class="text-center text-muted"><a href="{{ route('register') }}"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
                         </div>
                     </div>
                 </div>
@@ -247,7 +253,7 @@
     <div id="all">
         @yield('content')
     </div>
-    
+
     <!--
     *** FOOTER ***
     _________________________________________________________
@@ -316,8 +322,8 @@
         </div>
         <!-- /#footer-->
         <!-- *** FOOTER END ***-->
-        
-        
+
+
     <!-- *** COPYRIGHT *** -->
     <div id="copyright">
         <div class="container">
@@ -334,7 +340,7 @@
         </div>
     </div>
     <!-- *** COPYRIGHT END ***-->
-    
+
 <!-- JavaScript files-->
 <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
