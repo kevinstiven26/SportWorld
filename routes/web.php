@@ -25,3 +25,7 @@ Route::resource('categories', 'Category\CategoryController');
 Route::resource('products', 'Product\ProductController');
 Route::resource('field_types', 'FieldType\FieldTypeController');
 Route::resource('field_products', 'FieldProduct\FieldProductController'); 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
