@@ -7,6 +7,8 @@
         <div class="box">
           <h1>Listado de Productos</h1>
           <hr>
+          <a href="{{route('products.create')}}" class="btn btn-primary navbar-btn"><i class="fa fa-plus"></i><span>Agregar Producto</span></a>
+          <hr>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>

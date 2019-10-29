@@ -7,6 +7,8 @@
         <div class="box">
           <h1>Listado de Clientes</h1>
           <hr>
+          <a href="{{route('customers.create')}}" class="btn btn-primary navbar-btn"><i class="fa fa-plus"></i><span>Agregar Cliente</span></a>
+          <hr>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>

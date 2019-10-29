@@ -13,6 +13,15 @@
           </nav>
         </div>
         <div class="col-lg-12">
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
           <div id="contact" class="box">
             @if(isset($category))
               <h2>Editar Categoria</h2>

@@ -7,6 +7,8 @@
         <div class="box">
           <h1>Campos Productos</h1>
           <hr>
+          <a href="{{route('field_products.create')}}" class="btn btn-primary navbar-btn"><i class="fa fa-plus"></i><span>Agregar Campo Producto</span></a>
+          <hr>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>

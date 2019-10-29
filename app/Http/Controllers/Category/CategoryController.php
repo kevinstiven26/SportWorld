@@ -26,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories_select = Category::all();
+        $categories = Category::all();
+        $categories_select = $categories->where('category','')->sortBy('name');
         return view('category.create', compact('categories_select'));
     }
 
@@ -66,7 +67,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('category.create',compact('category'));
+        $categories = Category::all();
+        $categories_select = $categories->where('category','')->sortBy('name');
+        return view('category.create',compact('category','categories_select'));
     }
 
     /**
