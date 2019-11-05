@@ -46,7 +46,13 @@
                       <select id="field_type" name="field_type_id" class="form-control">
                           <option></option>
                           @foreach ($field_types_select as  $field_type_select)
-                            <option value="{{ $field_type_select->id}}">{{ $field_type_select->name }}</option>
+                            <option value="{{ $field_type_select->id}}"
+                            @if (isset($field_product))
+                                @if ($field_product->field_type_id == $field_type_select->id)
+                                    selected='selected'
+                                @endif
+                            @endif
+                            >{{ $field_type_select->name }}</option>
                           @endforeach
                       </select> 
                     </div>

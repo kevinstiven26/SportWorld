@@ -67,7 +67,8 @@ class FieldProductController extends Controller
      */
     public function edit(FieldProduct $field_product)
     {
-        return view('fieldProduct.create',compact('field_product'));
+        $field_types_select = FieldType::all();
+        return view('fieldProduct.create',compact('field_product','field_types_select'));
     }
 
     /**
@@ -79,9 +80,9 @@ class FieldProductController extends Controller
      */
     public function update(Request $request, FieldProduct $field_product)
     {
-        $validated = $request->validate([
-            'name' => 'max:75',
-            'field_type_id' => 'integer'
+        $request->validate([
+            'name' => 'required|max:75',
+            'field_type_id' => 'required|integer',
         ]);
 
         if($request->has('name')) {

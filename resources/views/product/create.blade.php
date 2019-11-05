@@ -43,7 +43,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="description">Descripción</label>
-                  <input id="description" type="text" class="form-control" name="description" @if(isset($product)) value="{{ $product->nit }}" @endif>
+                  <input id="description" type="text" class="form-control" name="description" @if(isset($product)) value="{{ $product->description }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -64,7 +64,13 @@
                       <select id="provider_id" name="provider_id" class="form-control">
                           <option></option>
                           @foreach ($providers as  $provider)
-                            <option value="{{ $provider->id}}">{{ $provider->name }}</option>
+                            <option value="{{ $provider->id}}"
+                             @if (isset($product))
+                                 @if ($product->provider_id == $provider->id)
+                                    selected='selected'
+                                 @endif
+                             @endif
+                            >{{ $provider->name }}</option>
                           @endforeach
                       </select> 
                     </div>
@@ -75,7 +81,13 @@
                       <select id="category_id" name="category_id" class="form-control">
                           <option></option>
                           @foreach  ($categories as  $category)
-                            <option value="{{ $category->id}}">{{ $category->name }}</option>
+                            <option value="{{ $category->id}}"
+                              @if (isset($product))
+                                  @if ($product->category_id == $category->id)
+                                     selected='selected'
+                                  @endif
+                              @endif
+                             >{{ $category->name }}</option>
                           @endforeach
                       </select> 
                     </div>

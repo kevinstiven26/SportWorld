@@ -22,7 +22,7 @@
                 @foreach ($field_products as $field_product )
                     <tr>
                         <td>{{$field_product->name}}</td>
-                        <td>{{$field_product->field_product_id}}</td>
+                        <td>{{$field_product->field_type->name}}</td>
                         <td>  
                           <a href="{{ route('field_products.edit', [ 'field_product' => $field_product->id ] )}}" class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                         <form style="display: inline;" action="{{ route('field_products.destroy' , [ 'field_product' => $field_product->id ]) }}" method="POST">

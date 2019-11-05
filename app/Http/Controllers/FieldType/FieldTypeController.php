@@ -77,7 +77,7 @@ class FieldTypeController extends Controller
     public function update(Request $request, FieldType $field_type)
     {
         $validated = $request->validate([
-            'name' => 'max:75',
+            'name' => 'required|max:75',
         ]);
 
         if($request->has('name')) {

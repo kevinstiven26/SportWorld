@@ -38,11 +38,11 @@ class ProviderController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nit' => 'required',
-            'name' => 'required',
-            'logo_image' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required'
+            'nit' => 'required|max:15',
+            'name' => 'required|max:75',
+            'logo_image' => 'required|max:150',
+            'phone_number' => 'required|max:45',
+            'address' => 'required|max:75'
         ]);
         
         Provider::create($validated);
@@ -81,11 +81,11 @@ class ProviderController extends Controller
     public function update(Request $request, Provider $provider)
     {
         $validated = $request->validate([
-            'nit' => 'max:15',
-            'name' => 'max:75',
-            'logo_image' => 'max:150',
-            'phone_number' => 'max:45',
-            'address' => 'max:75'
+            'nit' => 'required|max:15',
+            'name' => 'required|max:75',
+            'logo_image' => 'required|max:150',
+            'phone_number' => 'required|max:45',
+            'address' => 'required|max:75'
         ]);
 
         if($request->has('nit')) {

@@ -44,7 +44,7 @@ class CustomerController extends Controller
             'name' => 'required|max:100',
             'phone_number' => 'required|max:45',
             'address' => 'required|max:75',
-            'email' => 'required|max:50',
+            'email' => 'required|max:50|email',
             'user_id' => 'required|integer'
         ]);
         
@@ -71,7 +71,8 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        return view('customer.create',compact('customer'));
+        $users = User::all();
+        return view('customer.create',compact('customer','users'));
     }
 
     /**
@@ -83,13 +84,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $validated = $request->validate([
-            'identification' => 'max:10',
-            'name' => 'max:100',
-            'phone_number' => 'max:45',
-            'address' => 'max:75',
-            'email' => 'max:50',
-            'user_id' => 'integer'
+        $request->validate([
+            'identification' => 'required|max:10',
+            'name' => 'required|max:100',
+            'phone_number' => 'required|max:45',
+            'address' => 'required|max:75',
+            'email' => 'required|max:50|email',
+            'user_id' => 'required|integer'
         ]);
 
         if($request->has('identification')) {

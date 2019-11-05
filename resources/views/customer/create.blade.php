@@ -70,7 +70,13 @@
                     <select id="user_id" name="user_id" class="form_control">
                         <option></option>
                         @foreach ($users as  $user)
-                          <option value="{{ $user->id}}">{{ $user->name }}</option>
+                          <option value="{{ $user->id}}"
+                            @if (isset($customer))
+                              @if ($user->id == $customer->user_id)
+                              selected='selected'
+                              @endif
+                            @endif
+                          >{{ $user->name }}</option>
                         @endforeach
                     </select> 
                   </div>
@@ -78,7 +84,7 @@
                 <div class="col-md-12 text-center">
                   <button type="submit" class="btn btn-primary">
                     <i class="fa fa-envelope-o"></i>
-                    @if(isset($user))
+                    @if(isset($customer))
                       Editar
                     @else
                       Guardar

@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content">
-    <div id="customer-orders" class="col-lg-8 offset-2">
+    <div id="customer-orders" class="col-lg-12">
         <div class="box">
           <h1>Listado de Productos</h1>
           <hr>
@@ -29,8 +29,8 @@
                         <td>{{$product->name}}</td>
                         <td>{{$product->description}}</td>
                         <td>{{$product->price}}</td>
-                        <td>{{$product->provider_id}}</td>
-                        <td>{{$product->category_id}}</td>
+                        <td>{{$product->provider->name}}</td>
+                        <td>{{$product->category->name}}</td>
                         <td>  
                           <a href="{{ route('products.edit', [ 'product' => $product->id ] )}}" class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                         <form style="display: inline;" action="{{ route('products.destroy' , [ 'product' => $product->id ]) }}" method="POST">

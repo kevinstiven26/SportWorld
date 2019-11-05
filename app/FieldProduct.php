@@ -16,7 +16,7 @@ class FieldProduct extends Model
     ];
 
     public function field_type() {
-        return $this->hasOne(FieldType::class());
+        return $this->hasOne(FieldType::class,'id','field_type_id');
     }
 
     public function additional_field()

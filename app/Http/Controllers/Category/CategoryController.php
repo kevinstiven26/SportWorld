@@ -82,7 +82,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'name' => 'max:75',
+            'name' => 'required|max:75',
             'category' => 'nullable'
         ]);
 

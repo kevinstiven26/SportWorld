@@ -73,7 +73,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('product.create',compact('product'));
+        $providers = Provider::all();
+        $categories = Category::all();
+        return view('product.create',compact('product','providers','categories'));
     }
 
     /**
@@ -86,12 +88,12 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
-            'name' => 'max:75',
-            'description' => 'max:255',
-            'price' => 'numeric',
-            'image' => 'max:255',
-            'provider_id' => 'integer',
-            'category_id' => 'integer'
+            'name' => 'required|max:75',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'required',
+            'provider_id' => 'required',
+            'category_id' => 'required'
         ]);
 
         if($request->has('name')) {

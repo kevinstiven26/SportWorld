@@ -17,15 +17,14 @@ class Product extends Model
         'image',
         'provider_id',
         'category_id',
-        'product_type_id',
     ];
 
     public function provider() {
-        return $this->hasOne(Provider::class);
+        return $this->hasOne(Provider::class,'id','provider_id');
     }
 
     public function category() {
-        return $this->hasOne(Category::class);
+        return $this->hasOne(Category::class,'id','category_id');
     }
  
     public function additional_fields() {
