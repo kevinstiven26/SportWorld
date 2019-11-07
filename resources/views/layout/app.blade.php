@@ -18,7 +18,7 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     @yield('styles')
-    <title>App Name - @yield('title')</title>
+    <title>Sport World @yield('title')</title>
 </head>
 <body>
     <!-- navbar-->
@@ -28,7 +28,7 @@
         <div id="top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 offer mb-3 mb-lg-0"><a href="#" class="btn btn-success btn-sm">Offer of the day</a><a href="#" class="ml-1">Get flat 35% off on orders over $50!</a></div>
+                    <div class="col-lg-6 offer mb-3 mb-lg-0"></div>
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
                             @guest
@@ -100,7 +100,7 @@
             </div>
             <div id="navigation" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a href="#" class="nav-link active">Inicio</a></li>
+                <li class="nav-item"><a href="{{ route('product_list.index')}}" class="nav-link active">Inicio</a></li>
                 <li class="nav-item dropdown menu-large"><a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Men<b class="caret"></b></a>
                     <ul class="dropdown-menu megamenu">
                     <li>
