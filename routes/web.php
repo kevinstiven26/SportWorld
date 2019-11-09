@@ -25,7 +25,8 @@ Route::resource('categories', 'Category\CategoryController');
 Route::resource('products', 'Product\ProductController');
 Route::resource('product_list', 'Product\ProductListController');
 Route::resource('field_types', 'FieldType\FieldTypeController');
-Route::resource('field_products', 'FieldProduct\FieldProductController'); 
+Route::resource('field_products', 'FieldProduct\FieldProductController');
+Route::resource('shoppingcarts', 'ShoppingCart\ShoppingCartController');
 
 Auth::routes();
 

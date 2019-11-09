@@ -31,7 +31,7 @@
                         <td>{{$product->price}}</td>
                         <td>{{$product->provider->name}}</td>
                         <td>{{$product->category->name}}</td>
-                        <td>  
+                        <td>
                           <a href="{{ route('products.edit', [ 'product' => $product->id ] )}}" class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                         <form style="display: inline;" action="{{ route('products.destroy' , [ 'product' => $product->id ]) }}" method="POST">
                             @csrf
@@ -39,7 +39,7 @@
                             <button type="submit" class="btn btn-default btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
-                          </form>  
+                          </form>
                         </td>
                     </tr>
                 @endforeach

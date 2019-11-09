@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    { 
+    {
         factory(Provider::class, 10)->create();
-        factory(Category::class, 50)->create();
+        // factory(Category::class, 50)->create();
     }
 }
