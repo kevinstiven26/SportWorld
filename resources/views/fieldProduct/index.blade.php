@@ -31,6 +31,9 @@
                             <button type="submit" class="btn btn-default btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
+                            @if($field_product->field_type_id == 1)
+                              <a title='Agregar Valores' href="{{ route('field_product.field_value.index', $field_product->id) }}"  class="btn btn-default btn-sm btn-primary"><i class="fa fa-plus-square-o"></i></a>
+                            @endif
                           </form>  
                         </td>
                     </tr>
