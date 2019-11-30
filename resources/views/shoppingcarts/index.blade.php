@@ -20,9 +20,10 @@
             @isset($shoppingCart)
             <div id="basket" class="col-lg-9">
               <div class="box">
-                <form method="post" action="checkout1.html">
+                <form method="POST" action="{{ route('quantity') }}">
+                @csrf
                   <h1>Shopping cart</h1>
-                  <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+                  <p class="text-muted">You currently have {{ count($shoppingCart) }} item(s) in your cart.</p>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -30,7 +31,6 @@
                           <th colspan="2">Product</th>
                           <th>Quantity</th>
                           <th>Unit price</th>
-                          <th>Discount</th>
                           <th colspan="2">Total</th>
                         </tr>
                       </thead>
@@ -40,11 +40,10 @@
                           <td><a href="#"><img src="https://via.placeholder.com/50x50" alt="Black Blouse Armani"></a></td>
                           <td><a href="#">{{ $p->name }}</a></td>
                           <td>
-                            <input type="number" value="1" class="form-control">
+                            <input type="number" name="quantity_{{ $p->id }}" value="@if(isset($quantity) && isset($quantity['quantity_'.$p->id])){{ $quantity['quantity_'.$p->id] }}@else{{ 1 }}@endif" class="form-control" min="1">
                           </td>
-                          <td>$ {{ $p->price }}</td>
-                          <td>$0.00</td>
-                          <td>$ {{ $p->price }}</td>
+                          <td>$ {{ number_format($p->price, 0, ',', '.') }}</td>
+                          <td>$ @if(isset($quantity) && isset($quantity['quantity_'.$p->id])){{ number_format($p->price * $quantity['quantity_'.$p->id], 0, ',', '.') }}@else{{ number_format($p->price, 0, ',', '.') }}@endif</td>
                           <td><a href="{{ route('shoppingcarts.create', [ 'index' => $loop->index]) }}"><i class="fa fa-trash-o"></i></a></td>
                         </tr>
                         @endforeach
@@ -52,7 +51,7 @@
                       <tfoot>
                         <tr>
                           <th colspan="5">Total</th>
-                          <th colspan="2">$446.00</th>
+                          <th colspan="2">$ {{ number_format($total, 0, ',', '.') }}</th>
                         </tr>
                       </tfoot>
                     </table>
@@ -61,8 +60,10 @@
                   <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
                     <div class="left"><a href="{{ route('product_list.index') }}" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
                     <div class="right">
-                      <button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Update cart</button>
-                      <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i></button>
+                    @if(isset($shoppingCart) && count($shoppingCart) > 0)
+                        <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Update cart</button>
+                        <a href="{{ route('orders.index') }} " class="btn btn-primary"> Proceed to checkout <i class="fa fa-chevron-right"></i></a>
+                      @endif
                     </div>
                   </div>
                 </form>
@@ -133,11 +134,11 @@
                     <tbody>
                       <tr>
                         <td>Order subtotal</td>
-                        <th>$446.00</th>
+                        <th>$ {{ number_format($total, 0, ',', '.') }}</th>
                       </tr>
                       <tr>
                         <td>Shipping and handling</td>
-                        <th>$10.00</th>
+                        <th>$0.00</th>
                       </tr>
                       <tr>
                         <td>Tax</td>
@@ -145,7 +146,7 @@
                       </tr>
                       <tr class="total">
                         <td>Total</td>
-                        <th>$456.00</th>
+                        <th>${{ number_format($total, 0, ',', '.') }}</th>
                       </tr>
                     </tbody>
                   </table>

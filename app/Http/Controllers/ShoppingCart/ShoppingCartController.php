@@ -16,7 +16,16 @@ class ShoppingCartController extends Controller
      */
     public function index()
     {
-        return view('shoppingcart.index');
+       $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];
+       $quantity = session()->has('quantity') ? session()->get('quantity') : [];
+        $total = 0;
+        if(count($shoppingCart) >0 ) {
+            foreach ($shoppingCart as $product) {
+                $total = isset($quantity['quantity_'.$product->id]) ?  $total += ($product->price * $quantity['quantity_'.$product->id]) : $total += ($product->price * 1);
+            }
+        }
+
+        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity'));
     }
 
     /**
@@ -26,14 +35,14 @@ class ShoppingCartController extends Controller
      */
     public function create()
     {
-
         $parameter = request()->query();
         $productId = isset($parameter['product']) ? (int) $parameter['product'] : null;
 
         $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : null;
+        $total = 0;
 
         if(isset($parameter['index'])) {
-            session()->flush();
+            session()->forget('shopping_cart.products');
             $num = \is_array($shoppingCart) ? count($shoppingCart) : 0;
             $index = (int) $parameter['index'];
 
@@ -46,11 +55,18 @@ class ShoppingCartController extends Controller
         } else {
             $product = Product::findOrFail($productId);
             session()->push('shopping_cart.products', $product);
-
         }
 
-        $shoppingCart = session('shopping_cart.products');
-        return view('shoppingcarts.index', compact('shoppingCart'));
+        $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];
+        $quantity = session()->has('quantity') ? session()->get('quantity') : [] ;
+
+        if(count($shoppingCart) >0 ) {
+            foreach ($shoppingCart as $product) {
+                $total = isset($quantity['quantity_'.$product->id]) ?  $total += ($product->price * $quantity['quantity_'.$product->id]) : $total += ($product->price * 1);
+            }
+        }
+
+        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity'));
     }
 
     /**
@@ -61,7 +77,22 @@ class ShoppingCartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*
+        $parameters = $request->input();
+        session()->forget('quantity');
+        session()->put('quantity', $parameters);
+        $quantity = session()->get('quantity');
+
+        $shoppingCart = session('shopping_cart.products');
+        $total = 0;
+        if(count($shoppingCart) >0 ) {
+            foreach ($shoppingCart as $product) {
+                $total += $product->price * 1;
+            }
+        }
+
+        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity'));
+        */
     }
 
     /**
@@ -107,6 +138,24 @@ class ShoppingCartController extends Controller
     public function destroy(ShoppingCart $shoppingCart)
     {
         //
+    }
+
+
+    public function updateQuantity() {
+        $parameters = request()->input();
+        session()->forget('quantity');
+        session()->put('quantity', $parameters);
+        $quantity = session()->has('quantity') ? session()->get('quantity') : [];
+
+        $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];
+        $total = 0;
+        if(count($shoppingCart) >0 ) {
+            foreach ($shoppingCart as $product) {
+                $total = isset($quantity['quantity_'.$product->id]) ?  $total += ($product->price * $quantity['quantity_'.$product->id]) : $total += ($product->price * 1);
+            }
+        }
+
+        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity'));
     }
 
 }

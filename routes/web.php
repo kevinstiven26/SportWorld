@@ -27,6 +27,8 @@ Route::resource('product_list', 'Product\ProductListController');
 Route::resource('field_types', 'FieldType\FieldTypeController');
 Route::resource('field_products', 'FieldProduct\FieldProductController');
 Route::resource('shoppingcarts', 'ShoppingCart\ShoppingCartController');
+Route::resource('orders', 'Order\OrderController')->middleware('auth');
+Route::post('shoppingcarts/update', 'ShoppingCart\ShoppingCartController@updateQuantity')->name('quantity');
 
 Auth::routes();
 
