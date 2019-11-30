@@ -9,9 +9,10 @@ class FieldValue extends Model
 {
     protected $fillable = [
         'name',
+        'field_product_id',
     ];
 
-    public function field_products() {
-        return $this->belongsToMany(FieldProduct::class);
+    public function field_product() {
+        return $this->belongsTo(FieldProduct::class);
     }
 }

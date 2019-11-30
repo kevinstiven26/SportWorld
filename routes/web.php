@@ -23,9 +23,14 @@ Route::resource('providers', 'Provider\ProviderController');
 Route::resource('customers', 'Customer\CustomerController');
 Route::resource('categories', 'Category\CategoryController');
 Route::resource('products', 'Product\ProductController');
+/* Route::resource('product_list', 'Product\ProductListController',['except'=>['index']]); */
 Route::resource('product_list', 'Product\ProductListController');
 Route::resource('field_types', 'FieldType\FieldTypeController');
 Route::resource('field_products', 'FieldProduct\FieldProductController'); 
+
+Route::resource('category.field_product', 'Category\CategoryFieldProductController',['only'=>['index','create','store','destroy']]); 
+Route::resource('field_product.field_value', 'FieldProduct\FieldProductFieldValueController',['only'=>['index','create','store','destroy']]); 
+
 
 Auth::routes();
 

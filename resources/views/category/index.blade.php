@@ -25,13 +25,14 @@
                         <td>{{$category->category}}</td>
                         <td>  
                           <a href="{{ route('categories.edit', [ 'category' => $category->id ] )}}" class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                        <form style="display: inline;" action="{{ route('categories.destroy' , [ 'category' => $category->id ]) }}" method="POST">
+                          <form style="display: inline;" action="{{ route('categories.destroy' , [ 'category' => $category->id ]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-default btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
-                          </form>  
+                          </form>
+                          <a title='Asociar campos' href="{{ route('category.field_product.index', $category->id) }}"  class="btn btn-default btn-sm btn-primary"><i class="fa fa-plus-square-o"></i></a>  
                         </td>
                     </tr>
                 @endforeach

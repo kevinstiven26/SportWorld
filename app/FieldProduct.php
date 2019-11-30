@@ -29,6 +29,6 @@ class FieldProduct extends Model
     }
 
     public function field_values() {
-        return $this->belongsToMany(FieldValue::class);
+        return $this->hasMany(FieldValue::class);
     }
 }

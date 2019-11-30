@@ -16,6 +16,9 @@ class CreateFieldValuesTable extends Migration
         Schema::create('field_values', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name',75);
+            $table->unsignedBigInteger('field_product_id');
+
+            $table->foreign('field_product_id')->references('id')->on('field_products');
             $table->timestamps();
         });
     }
