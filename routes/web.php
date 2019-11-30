@@ -26,7 +26,10 @@ Route::resource('products', 'Product\ProductController');
 /* Route::resource('product_list', 'Product\ProductListController',['except'=>['index']]); */
 Route::resource('product_list', 'Product\ProductListController');
 Route::resource('field_types', 'FieldType\FieldTypeController');
-Route::resource('field_products', 'FieldProduct\FieldProductController'); 
+Route::resource('field_products', 'FieldProduct\FieldProductController');
+Route::resource('shoppingcarts', 'ShoppingCart\ShoppingCartController');
+Route::resource('orders', 'Order\OrderController')->middleware('auth');
+Route::post('shoppingcarts/update', 'ShoppingCart\ShoppingCartController@updateQuantity')->name('quantity');
 
 Route::resource('category.field_product', 'Category\CategoryFieldProductController',['only'=>['index','create','store','destroy']]); 
 Route::resource('field_product.field_value', 'FieldProduct\FieldProductFieldValueController',['only'=>['index','create','store','destroy']]); 

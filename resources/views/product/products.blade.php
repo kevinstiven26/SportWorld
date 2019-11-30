@@ -84,7 +84,7 @@
                         </div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-fluid"></a>
                         <div class="text">
                             <h3><a href="detail.html">{{$product->name}}</a></h3>
-                            <p class="price"> 
+                            <p class="price">
                             <del></del>$ {{number_format($product->price, 0)}}
                             </p>
                             <p class="buttons"><a href="{{ route('product_list.show', $product->id)}}" class="btn btn-outline-secondary">Ver Detalle</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir al Carrito</a></p>
