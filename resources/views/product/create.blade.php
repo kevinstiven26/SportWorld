@@ -30,14 +30,14 @@
             @endif
           <form method="POST" @if(isset($product)) action="{{ route('products.update', [ 'product' => $product->id ]) }}" @else action="{{ route('products.store') }}" @endif>
             @csrf
-            @if(isset($product)) 
+            @if(isset($product))
               @method('PUT')
             @endif
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input id="name" type="text" class="form-control" name="name" @if(isset($product)) value="{{ $product->name }}" @endif>
+                    <input id="name" type="text" class="form-control" name="name"  value="@if(isset($product)){{ $product->name }}@else{{ old('name') }}@endif" >
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -72,7 +72,7 @@
                              @endif
                             >{{ $provider->name }}</option>
                           @endforeach
-                      </select> 
+                      </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -89,7 +89,7 @@
                               @endif
                              >{{ $category->name }}</option>
                           @endforeach
-                      </select> 
+                      </select>
                     </div>
                 </div>
                 <div class="col-md-12 text-center">

@@ -51,7 +51,7 @@
                       <tfoot>
                         <tr>
                           <th colspan="5">Total</th>
-                          <th colspan="2">$ {{ number_format($total, 0, ',', '.') }}</th>
+                          <th colspan="2">${{ number_format($total, 0, ',', '.') }}</th>
                         </tr>
                       </tfoot>
                     </table>

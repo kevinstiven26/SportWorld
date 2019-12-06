@@ -87,7 +87,7 @@
                             <p class="price">
                             <del></del>$ {{number_format($product->price, 0)}}
                             </p>
-                            <p class="buttons"><a href="{{ route('product_list.show', $product->id)}}" class="btn btn-outline-secondary">Ver Detalle</a><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir al Carrito</a></p>
+                            <p class="buttons"><a href="{{ route('product_list.show', $product->id)}}" class="btn btn-outline-secondary">Ver Detalle</a><a href="{{ route('shoppingcarts.create', [ 'product' => $product->id]) }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir al Carrito</a></p>
                         </div>
                         <!-- /.text-->
                         </div>

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-- Orden De Compra
+- Address
 @endsection
 
 @section('content')
@@ -21,6 +21,7 @@
               <div class="box">
                 <form method="POST" action="{{ route('orders.store') }}">
                    @csrf
+                   <input name="page" type="hidden" value="2"/>
                   <h1>Checkout - Address</h1>
                   <div class="nav flex-column flex-md-row nav-pills text-center"><a href="{{ route('orders.index') }}" class="nav-link flex-sm-fill text-sm-center active"> <i class="fa fa-map-marker">                  </i>Address</a><a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i class="fa fa-truck">                       </i>Delivery Method</a><a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i class="fa fa-money">                      </i>Payment Method</a><a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i class="fa fa-eye">                     </i>Order Review</a></div>
                   <div class="content py-3">
@@ -28,7 +29,12 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label for="firstname">Names</label>
-                          <input id="firstname" type="text" class="form-control" value="{{ $name }}">
+                          <input id="firstname" type="text" class="form-control @error('names') is-invalid @enderror" value="{{ $name }}" name="names">
+                            @error('names')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                       </div>
                     </div>
@@ -37,13 +43,18 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="company">Company</label>
-                          <input id="company" type="text" class="form-control">
+                          <input id="company" type="text" class="form-control" name="company">
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="street">Street</label>
-                          <input id="street" type="text" class="form-control">
+                          <label for="street">Address</label>
+                          <input id="street" type="text" class="form-control  @error('address') is-invalid @enderror" name="address">
+                            @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                       </div>
                     </div>
@@ -52,25 +63,45 @@
                       <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                           <label for="state">State</label>
-                          <input id="state" type="text" class="form-control">
+                          <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state">
+                            @error('state')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                       </div>
                       <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                           <label for="country">Country</label>
-                          <input id="country" type="text" class="form-control">
+                          <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country">
+                            @error('country')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="phone">Telephone</label>
-                          <input id="phone" type="text" class="form-control">
+                          <input id="phone" type="text" class="form-control @error('telephone') is-invalid @enderror" name="telephone">
+                            @error('telephone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="email">Email</label>
-                          <input id="email" type="text" class="form-control" value="{{ $email }}">
+                          <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" value="{{ $email }}" name="email">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                       </div>
                     </div>
@@ -96,7 +127,7 @@
                       <tbody>
                         <tr>
                           <td>Order subtotal</td>
-                          <th>$ {{ number_format($total, 0, ',', '.') }}</th>
+                          <th>${{ number_format($total, 0, ',', '.') }}</th>
                         </tr>
                       <tr>
                         <td>Shipping and handling</td>
