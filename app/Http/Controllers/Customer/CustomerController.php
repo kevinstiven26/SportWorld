@@ -47,7 +47,7 @@ class CustomerController extends Controller
             'email' => 'required|max:50|email',
             'user_id' => 'required|integer'
         ]);
-        
+
         Customer::create($validated);
         return redirect()->route('customers.index');
     }
@@ -58,9 +58,9 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customer $customer)
     {
-        //
+        return view('customer.account', compact('customer'));
     }
 
     /**
@@ -100,23 +100,23 @@ class CustomerController extends Controller
         if($request->has('name')) {
             $customer->name = $request->name;
         }
-        
+
         if($request->has('phone_number')) {
             $customer->phone_number = $request->phone_number;
         }
-        
+
         if($request->has('address')) {
             $customer->address = $request->address;
         }
-        
+
         if($request->has('email')) {
             $customer->email = $request->email;
         }
-        
+
         if($request->has('user_id')) {
             $customer->user_id = $request->user_id;
         }
-        
+
         if(!$customer->isDirty()) {
             return $this->errorResponse('Por favor cambie al menos uno de los campos.',422);
         }

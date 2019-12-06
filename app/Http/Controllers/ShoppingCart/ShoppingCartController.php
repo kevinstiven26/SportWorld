@@ -16,8 +16,8 @@ class ShoppingCartController extends Controller
      */
     public function index()
     {
-       $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];
-       $quantity = session()->has('quantity') ? session()->get('quantity') : [];
+        $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];
+        $quantity = session()->has('quantity') ? session()->get('quantity') : [];
         $total = 0;
         if(count($shoppingCart) >0 ) {
             foreach ($shoppingCart as $product) {

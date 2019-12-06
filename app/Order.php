@@ -5,6 +5,7 @@ namespace App;
 use App\Product;
 use App\Customer;
 use App\AdditionalField;
+use App\OrderProduct;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -28,7 +29,7 @@ class Order extends Model
         return $this->hasMany(AdditionalField::class);
     }
 
-    public function products() {
-        return $this->belongsToMany(Product::class);
+    public function orders_products() {
+        return $this->hasMany(OrderProduct::class);
     }
 }
