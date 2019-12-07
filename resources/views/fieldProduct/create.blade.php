@@ -37,7 +37,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input id="name" type="text" class="form-control" name="name" @if(isset($field_product)) value="{{ $field_product->name }}" @endif>
+                    <input id="name" type="text" class="form-control" name="name" @if(isset($field_product)) value="{{ $field_product->name }}" @else value="{{ old('name') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ShoppingCart;
 
+use App\FieldProduct;
 use App\ShoppingCart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

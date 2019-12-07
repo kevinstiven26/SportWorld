@@ -37,31 +37,31 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="nit">Nit</label>
-                  <input id="nit" type="text" class="form-control" name="nit" @if(isset($provider)) value="{{ $provider->nit }}" @endif>
+                  <input id="nit" type="text" class="form-control" name="nit" @if(isset($provider)) value="{{ $provider->nit }}" @else value="{{ old('nit') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input id="name" type="text" class="form-control" name="name" @if(isset($provider)) value="{{ $provider->name }}" @endif>
+                    <input id="name" type="text" class="form-control" name="name" @if(isset($provider)) value="{{ $provider->name }}" @else value="{{ old('name') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="logo_image">Imagen Logo</label>
-                    <input id="logo_image" type="text" class="form-control" name="logo_image" @if(isset($provider)) value="{{ $provider->logo_image }}" @endif>
+                    <input id="logo_image" type="text" class="form-control" name="logo_image" @if(isset($provider)) value="{{ $provider->logo_image }}" @else value="{{ old('logo_image') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="phone_number">Teléfono</label>
-                    <input id="phone_number" type="number" class="form-control" name="phone_number" @if(isset($provider)) value="{{ $provider->phone_number }}" @endif>
+                    <input id="phone_number" type="number" class="form-control" name="phone_number" @if(isset($provider)) value="{{ $provider->phone_number }}" @else value="{{ old('phone_number') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="address">Dirección</label>
-                    <input id="address" class="form-control" name="address" @if(isset($provider)) value="{{ $provider->address }}" @endif>
+                    <input id="address" class="form-control" name="address" @if(isset($provider)) value="{{ $provider->address }}" @else value="{{ old('address') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6 text-center">

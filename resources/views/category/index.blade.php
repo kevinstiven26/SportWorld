@@ -22,7 +22,7 @@
                 @foreach ($categories as $category )
                     <tr>
                         <td>{{$category->name}}</td>
-                        <td>{{$category->category}}</td>
+                        <td>{{$category->padre}}</td>
                         <td>  
                           <a href="{{ route('categories.edit', [ 'category' => $category->id ] )}}" class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                           <form style="display: inline;" action="{{ route('categories.destroy' , [ 'category' => $category->id ]) }}" method="POST">

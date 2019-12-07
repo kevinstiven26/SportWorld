@@ -43,19 +43,19 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="description">Descripción</label>
-                  <input id="description" type="text" class="form-control" name="description" @if(isset($product)) value="{{ $product->description }}" @endif>
+                  <input id="description" type="text" class="form-control" name="description" @if(isset($product)) value="{{ $product->description }}" @else value="{{ old('description') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="price">Precio</label>
-                    <input id="price" type="number" class="form-control" name="price" @if(isset($product)) value="{{ $product->price }}" @endif>
+                    <input id="price" type="number" class="form-control" name="price" @if(isset($product)) value="{{ $product->price }}" @else value="{{ old('price') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="image">Imagen</label>
-                    <input id="image" type="text" class="form-control" name="image" @if(isset($product)) value="{{ $product->image }}" @endif>
+                    <input id="image" type="text" class="form-control" name="image" @if(isset($product)) value="{{ $product->image }}" @else value="{{ old('image') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">

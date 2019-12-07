@@ -57,15 +57,14 @@
           <div class="col-lg-9">
             <div class="box info-bar">
               <div class="row">
-                <div class="col-md-12 col-lg-4 products-showing">Showing <strong>12</strong> of <strong>25</strong> products</div>
+                <div class="col-md-12 col-lg-4 products-showing">Mostrando <strong>{{$products->count()}}</strong> de <strong>{{$products->total()}}</strong> productos</div>
                 <div class="col-md-12 col-lg-7 products-number-sort">
                   <form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
-                    <div class="products-number"><strong>Show</strong><a href="#" class="btn btn-sm btn-primary">12</a><a href="#" class="btn btn-outline-secondary btn-sm">24</a><a href="#" class="btn btn-outline-secondary btn-sm">All</a><span>products</span></div>
-                    <div class="products-sort-by mt-2 mt-lg-0"><strong>Sort by</strong>
+                    <div class="products-number"><strong>Mostrar</strong><a href="{{ route('product_list.index', ['perpage' => 12])}}" class="btn btn-sm @if($products->perPage()==12){{ 'btn-primary'}}@else {{ 'btn-outline-secondary'}} @endif">12</a><a href="{{ route('product_list.index', ['perpage' => 24])}}" class="btn btn-sm @if($products->perPage()==24){{ 'btn-primary'}}@else {{ 'btn-outline-secondary'}} @endif">24</a><a href="{{ route('product_list.index', ['perpage' => $products->total()])}}" class="btn btn-sm @if($products->perPage()==$products->total()){{ 'btn-primary'}}@else {{ 'btn-outline-secondary'}} @endif">Todos</a></div>
+                    <div class="products-sort-by mt-2 mt-lg-0"><strong>Ordenar por</strong>
                       <select name="sort-by" class="form-control">
-                        <option>Price</option>
-                        <option>Name</option>
-                        <option>Sales first</option>
+                        <option>Nombre</option>
+                        <option>Precio</option>
                       </select>
                     </div>
                   </form>
@@ -83,7 +82,7 @@
                             </div>
                         </div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-fluid"></a>
                         <div class="text">
-                            <h3><a href="detail.html">{{$product->name}}</a></h3>
+                            <h3><a href="detail.html">{{$product->name}} </a></h3>
                             <p class="price">
                             <del></del>$ {{number_format($product->price, 0)}}
                             </p>
@@ -94,20 +93,8 @@
                         <!-- /.product            -->
                     </div>
               @endforeach
-            </div>
-            <div class="pages">
-              <p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
-              <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                <ul class="pagination">
-                  <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-                  <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                  <li class="page-item"><a href="#" class="page-link">2</a></li>
-                  <li class="page-item"><a href="#" class="page-link">3</a></li>
-                  <li class="page-item"><a href="#" class="page-link">4</a></li>
-                  <li class="page-item"><a href="#" class="page-link">5</a></li>
-                  <li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-                </ul>
-              </nav>
+            {{--   {{ $products->links() }} --}}
+              {{ $products->appends(['perpage'=>request()->perpage])->links()}}
             </div>
           </div>
           <!-- /.col-lg-9-->

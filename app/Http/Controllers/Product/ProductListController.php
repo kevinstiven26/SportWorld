@@ -18,17 +18,25 @@ class ProductListController extends Controller
     public function index()
     {
         $param = request()->query();
+
+        $perPage=6;
+        if(request()->has('perpage')){
+            $perPage=$param['perpage'];
+        }
+
         if(request()->has('category')) {
             $products = Product::join('categories','categories.id','=','products.category_id')
+                            ->select('products.*')
                             ->where('category_id','=',$param['category'])
                             ->orWhere('categories.category','=',$param['category'])
-                            ->get();
+                            ->paginate($perPage);
         } else if(request()->has('provider')) { 
             $products = Product::join('providers','providers.id','=','products.provider_id')
+                                    ->select('products.*')
                                     ->where('provider_id','=',$param['provider'])
-                                    ->get();
+                                    ->paginate($perPage);
         } else {
-            $products = Product::all();
+            $products = Product::paginate($perPage);
         }
         
         $categories = Category::whereNull('category')->get();

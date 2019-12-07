@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="name">Valor: </label>
-                    <input id="name" type="text" class="form-control" name="name" >
+                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name')}}" >
                   </div>
                 </div>
                 <div class="col-md-12 text-center">

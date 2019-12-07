@@ -37,31 +37,31 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="identification">Identificación </label>
-                  <input id="identification" type="text" class="form-control" name="identification" @if(isset($customer)) value="{{ $customer->identification }}" @endif>
+                  <input id="identification" type="text" class="form-control" name="identification" @if(isset($customer)) value="{{ $customer->identification }}" @else value="{{ old('identification') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input id="name" type="text" class="form-control" name="name" @if(isset($customer)) value="{{ $customer->name }}" @endif>
+                    <input id="name" type="text" class="form-control" name="name" @if(isset($customer)) value="{{ $customer->name }}" @else value="{{ old('name') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="phone_number">Teléfono</label>
-                    <input id="phone_number" type="number" class="form-control" name="phone_number" @if(isset($customer)) value="{{ $customer->phone_number }}" @endif>
+                    <input id="phone_number" type="number" class="form-control" name="phone_number" @if(isset($customer)) value="{{ $customer->phone_number }}" @else value="{{ old('phone_number') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="address">Dirección</label>
-                    <input id="address" class="form-control" name="address" @if(isset($customer)) value="{{ $customer->address }}" @endif>
+                    <input id="address" class="form-control" name="address" @if(isset($customer)) value="{{ $customer->address }}" @else value="{{ old('address') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" class="form-control" name="email" @if(isset($customer)) value="{{ $customer->email }}" @endif>
+                    <input id="email" class="form-control" name="email" @if(isset($customer)) value="{{ $customer->email }}" @else value="{{ old('email') }}" @endif>
                   </div>
                 </div>
                 <div class="col-md-6">
