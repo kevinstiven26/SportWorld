@@ -29,6 +29,7 @@
                       <thead>
                         <tr>
                           <th colspan="2">Product</th>
+                          <th></th>
                           <th>Quantity</th>
                           <th>Unit price</th>
                           <th colspan="2">Total</th>
@@ -39,6 +40,17 @@
                         <tr>
                           <td><a href="#"><img src="https://via.placeholder.com/50x50" alt="Black Blouse Armani"></a></td>
                           <td><a href="#">{{ $p->name }}</a></td>
+                          <td>
+                            @if($field_products->where('category_id', $p->category_id)->count() > 0)
+                                <select name="field_value_{{ $p->id }}">
+                                    @foreach($field_products as $fp)
+                                        @if($fp->category_id == $p->category_id)
+                                            <option value="{{ $fp->name }}" @if(isset($quantity['field_value_'.$p->id]) && $quantity["field_value_".$p->id] == $fp->name){{ 'selected' }}@endif>{{ $fp->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            @endif
+                          </td>
                           <td>
                             <input type="number" name="quantity_{{ $p->id }}" value="@if(isset($quantity) && isset($quantity['quantity_'.$p->id])){{ $quantity['quantity_'.$p->id] }}@else{{ 1 }}@endif" class="form-control" min="1">
                           </td>

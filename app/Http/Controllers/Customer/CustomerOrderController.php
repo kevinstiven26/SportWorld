@@ -62,7 +62,12 @@ class CustomerOrderController extends Controller
     {
         $products = Order::join('order_products as op', 'orders.id', '=', 'op.order_id')
             ->join('products as p', 'op.product_id', '=', 'p.id')
-            ->select('p.*', 'op.quantity')
+            ->leftJoin('additional_fields as af', function ($join) {
+                $join->on('af.product_id', '=', 'op.product_id')
+                ->on('af.order_id', '=', 'orders.id');
+            })
+            ->leftJoin('field_products as fp', 'fp.id', '=', 'af.field_product_id')
+            ->select('p.*', 'op.quantity', 'af.value', 'fp.name as field_product')
             ->where('orders.id', '=', $order->id)
             ->get();
 

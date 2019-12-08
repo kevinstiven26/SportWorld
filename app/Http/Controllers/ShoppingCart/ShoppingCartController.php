@@ -7,6 +7,7 @@ use App\ShoppingCart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\FieldProduct;
 
 class ShoppingCartController extends Controller
 {
@@ -19,6 +20,12 @@ class ShoppingCartController extends Controller
     {
         $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];
         $quantity = session()->has('quantity') ? session()->get('quantity') : [];
+
+         $field_products = FieldProduct::join('category_field_product as cfp', 'cfp.field_product_id', '=', 'field_products.id')
+        ->join('field_values as fp', 'fp.field_product_id', '=', 'cfp.field_product_id')
+        ->select('field_products.*', 'fp.*', 'cfp.category_id')
+        ->get();
+
         $total = 0;
         if(count($shoppingCart) >0 ) {
             foreach ($shoppingCart as $product) {
@@ -26,7 +33,7 @@ class ShoppingCartController extends Controller
             }
         }
 
-        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity'));
+        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity', 'field_products'));
     }
 
     /**
@@ -38,6 +45,11 @@ class ShoppingCartController extends Controller
     {
         $parameter = request()->query();
         $productId = isset($parameter['product']) ? (int) $parameter['product'] : null;
+
+        $field_products = FieldProduct::join('category_field_product as cfp', 'cfp.field_product_id', '=', 'field_products.id')
+        ->join('field_values as fp', 'fp.field_product_id', '=', 'cfp.field_product_id')
+        ->select('field_products.*', 'fp.*', 'cfp.category_id')
+        ->get();
 
         $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : null;
         $total = 0;
@@ -67,7 +79,7 @@ class ShoppingCartController extends Controller
             }
         }
 
-        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity'));
+        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity', 'field_products'));
     }
 
     /**
@@ -145,8 +157,16 @@ class ShoppingCartController extends Controller
     public function updateQuantity() {
         $parameters = request()->input();
         session()->forget('quantity');
+        session()->forget('field_values');
         session()->put('quantity', $parameters);
+        session()->put('field_values', $parameters);
+
         $quantity = session()->has('quantity') ? session()->get('quantity') : [];
+
+        $field_products = FieldProduct::join('category_field_product as cfp', 'cfp.field_product_id', '=', 'field_products.id')
+        ->join('field_values as fp', 'fp.field_product_id', '=', 'cfp.field_product_id')
+        ->select('field_products.*', 'fp.*', 'cfp.category_id')
+        ->get();
 
         $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];
         $total = 0;
@@ -156,7 +176,7 @@ class ShoppingCartController extends Controller
             }
         }
 
-        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity'));
+        return view('shoppingcarts.index', compact('shoppingCart', 'total', 'quantity', 'field_products'));
     }
 
 }
