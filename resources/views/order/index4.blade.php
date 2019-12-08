@@ -30,6 +30,7 @@
                         <thead>
                           <tr>
                             <th colspan="2">Product</th>
+                            <th></th>
                             <th>Quantity</th>
                             <th>Unit price</th>
                             <th>Total</th>
@@ -39,6 +40,7 @@
                         <tr>
                           <td><a href="#"><img src="https://via.placeholder.com/50x50" alt="Black Blouse Armani"></a></td>
                           <td><a href="#">{{ $p->name }}</a></td>
+                          <td>@if(isset($quantity['field_value_'.$p->id])){{ $quantity["field_value_".$p->id] }}@endif</td>
                           <td>
                             @if(isset($quantity) && isset($quantity['quantity_'.$p->id])){{ $quantity['quantity_'.$p->id] }}@else{{ 1 }}@endif
                           </td>

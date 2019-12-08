@@ -45,6 +45,7 @@
                     <thead>
                       <tr>
                         <th colspan="2">Product</th>
+                        <th></th>
                         <th>Quantity</th>
                         <th>Unit price</th>
                         <th>Total</th>
@@ -55,6 +56,7 @@
                       <tr>
                         <td><a href="#"><img src="https://via.placeholder.com/50x50" alt="{{ $product->name }}"></a></td>
                         <td><a href="#">{{ $product->name }}</a></td>
+                        <td>@if($product->field_product && $product->value){{ $product->field_product .' '. $product->value }}@else{{ '-' }}@endif</td>
                         <td>{{ $product->quantity }}</td>
                         <td>${{ number_format($product->price, 0, '.', ',') }}</td>
                         <td>{{ number_format($product->price * $product->quantity, 0, '.', ',') }}</td>

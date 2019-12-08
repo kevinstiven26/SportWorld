@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 class AdditionalField extends Model
 {
     protected $fillable = [
-        'valor',
+        'value',
         'product_id',
-        'field_id',
+        'field_product_id',
         'order_id',
     ];
 

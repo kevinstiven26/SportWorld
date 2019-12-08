@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Customer;
 use App\Order;
 use App\OrderProduct;
+use App\AdditionalField;
+use App\FieldValue;
 
 class OrderController extends Controller
 {
@@ -131,12 +133,26 @@ class OrderController extends Controller
                 if(count($shoppingCart) >0 ) {
                     foreach ($shoppingCart as $product) {
 
-                        $quantity = isset($quantity['quantity_'.$product->id]) ? $quantity['quantity_'.$product->id] : 1;
+                        $cantity = isset($quantity['quantity_'.$product->id]) ? $quantity['quantity_'.$product->id] : 1;
                         OrderProduct::create([
                             'product_id' => $product->id,
                             'order_id' => $order->id,
-                            'quantity' => $quantity
+                            'quantity' => $cantity
                         ]);
+
+                        if(isset($quantity['field_value_'.$product->id])) {
+
+                            $field_value = FieldValue::where('name', '=', $quantity['field_value_'.$product->id])->first();
+                            $value = $quantity['field_value_'.$product->id];
+                            AdditionalField::create([
+                                'value' => $value,
+                                'product_id' => $product->id,
+                                'field_product_id' => $field_value->field_product_id,
+                                'order_id' => $order->id
+
+                            ]);
+                        }
+
                     }
                 }
 
