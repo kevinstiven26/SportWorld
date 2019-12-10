@@ -17,7 +17,7 @@ class CreateProvidersTable extends Migration
             $table->bigIncrements('id');
             $table->string('nit',15);
             $table->string('name',75);
-            $table->string('logo_image',150);
+            $table->text('logo_image')->nullable();
             $table->string('phone_number',45);
             $table->string('address',75);
             $table->timestamps();

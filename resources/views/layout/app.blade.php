@@ -96,7 +96,7 @@
               <!-- *** TOP BAR END ***-->
         </div>
         <nav class="navbar navbar-expand-lg">
-            <div class="container"><a href="index.html" class="navbar-brand home"><img src="img/logo.png" alt="Obaju logo" class="d-none d-md-inline-block"><img src="img/logo-small.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>
+            <div class="container"><a href="index.html" class="navbar-brand home"><img src="img/logosport.jpg" height="50px" width="90px" class="d-none d-md-inline-block"><img src="img/logo-small.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></a>
             <div class="navbar-buttons">
                 <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
                 <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
@@ -125,26 +125,28 @@
                 </li>
                 @endforeach
 
-                <li class="nav-item dropdown menu-large">
-                    <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Administración<b class="caret"></b></a>
-                    <ul class="dropdown-menu megamenu">
-                        <li>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-3">
-                                    <h5>Metadatos</h5>
-                                    <ul class="list-unstyled mb-3">
-                                    <li class="nav-item"><a href="{{ route('customers.index')}}" class="nav-link">Clientes</a></li>
-                                    <li class="nav-item"><a href="{{ route('providers.index')}}" class="nav-link">Proveedores</a></li>
-                                    <li class="nav-item"><a href="{{ route('categories.index')}}" class="nav-link">Categorias</a></li>
-                                    <li class="nav-item"><a href="{{ route('products.index')}}" class="nav-link">Productos</a></li>
-                                    <li class="nav-item"><a href="{{ route('field_types.index')}}" class="nav-link">Tipo de Campos</a></li>
-                                    <li class="nav-item"><a href="{{ route('field_products.index')}}" class="nav-link">Campos Productos</a></li>
-                                    </ul>
+                @if(Auth::check() && Auth::user()->email ==  'administrador@gmail.com')
+                    <li class="nav-item dropdown menu-large">
+                        <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Administración<b class="caret"></b></a>
+                        <ul class="dropdown-menu megamenu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3">
+                                        <h5>Metadatos</h5>
+                                        <ul class="list-unstyled mb-3">
+                                        <li class="nav-item"><a href="{{ route('customers.index')}}" class="nav-link">Clientes</a></li>
+                                        <li class="nav-item"><a href="{{ route('providers.index')}}" class="nav-link">Proveedores</a></li>
+                                        <li class="nav-item"><a href="{{ route('categories.index')}}" class="nav-link">Categorias</a></li>
+                                        <li class="nav-item"><a href="{{ route('products.index')}}" class="nav-link">Productos</a></li>
+                                        <li class="nav-item"><a href="{{ route('field_types.index')}}" class="nav-link">Tipo de Campos</a></li>
+                                        <li class="nav-item"><a href="{{ route('field_products.index')}}" class="nav-link">Campos Productos</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 </ul>
                 <div class="navbar-buttons d-flex justify-content-end">
                 <!-- /.nav-collapse-->
@@ -154,13 +156,13 @@
             </div>
             </div>
         </nav>
-        <div id="search" class="collapse">
+        <div id="search" class="collapse" method="POST" action="{{ route('product_list.index')}}">
             <div class="container">
             <form role="search" class="ml-auto">
                 <div class="input-group">
-                <input type="text" placeholder="Search" class="form-control">
+                <input type="text" placeholder="Buscar" name="palabra" id="palabra" class="form-control">
                 <div class="input-group-append">
-                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </div>
                 </div>
             </form>

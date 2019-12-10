@@ -35,6 +35,8 @@ class ProductListController extends Controller
                                     ->select('products.*')
                                     ->where('provider_id','=',$param['provider'])
                                     ->paginate($perPage);
+        } else if(request()->has('palabra')) {
+            $products = Product::where('name','LIKE','%'.$param['palabra'].'%')->paginate($perPage);
         } else {
             $products = Product::paginate($perPage);
         }

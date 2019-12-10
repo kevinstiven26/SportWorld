@@ -77,8 +77,8 @@
                         <div class="product">
                         <div class="flip-container">
                             <div class="flipper">
-                            <div class="front"><a href="detail.html"><img src="img/product1.jpg" alt="" class="img-fluid"></a></div>
-                            <div class="back"><a href="detail.html"><img src="img/product1_2.jpg" alt="" class="img-fluid"></a></div>
+                            <div class="front"><a href="{{ route('product_list.show', $product->id)}}"><img @if($product->image != '') src="{{$product->image}}" @else src="img/product1.jpg" @endif alt="" class="img-fluid"></a></div>
+                            <div class="back"><a href="{{ route('product_list.show', $product->id)}}"><img @if($product->image != '') src="{{$product->image}}" @else src="img/product1.jpg" @endif alt="" class="img-fluid"></a></div>
                             </div>
                         </div><a href="detail.html" class="invisible"><img src="img/product1.jpg" alt="" class="img-fluid"></a>
                         <div class="text">

@@ -25,7 +25,7 @@
               <tbody>
                 @foreach ($products as $product )
                     <tr>
-                        <th></th>
+                        <th><img height="40px" @if($product->image != '') src="{{$product->image}}" @else src="img/product1.jpg" @endif></th>
                         <td>{{$product->name}}</td>
                         <td>{{$product->description}}</td>
                         <td>{{$product->price}}</td>

@@ -12,7 +12,6 @@
         <div class="col-md-6">
             <div class="box">
                 <h1 class="text-center">{{$product->name}}</h1>
-                <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material &amp; care and sizing</a></p>
                 <p class="price">$ {{number_format($product->price,0)}}</p>
                 <p class="text-center buttons"><a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Agregar al Carrito</a></p>
             </div>
