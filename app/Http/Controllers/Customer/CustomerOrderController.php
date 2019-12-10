@@ -76,7 +76,6 @@ class CustomerOrderController extends Controller
             $total += ($p->price * $p->quantity);
         }
 
-
         return view('order.detail', compact('customer', 'products', 'order', 'total'));
     }
 

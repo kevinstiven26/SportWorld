@@ -23,7 +23,7 @@ class ShoppingCartController extends Controller
 
          $field_products = FieldProduct::join('category_field_product as cfp', 'cfp.field_product_id', '=', 'field_products.id')
         ->join('field_values as fp', 'fp.field_product_id', '=', 'cfp.field_product_id')
-        ->select('field_products.*', 'fp.*', 'cfp.category_id')
+        ->select('field_products.name as field_products_name', 'fp.*', 'cfp.category_id')
         ->get();
 
         $total = 0;
@@ -48,7 +48,7 @@ class ShoppingCartController extends Controller
 
         $field_products = FieldProduct::join('category_field_product as cfp', 'cfp.field_product_id', '=', 'field_products.id')
         ->join('field_values as fp', 'fp.field_product_id', '=', 'cfp.field_product_id')
-        ->select('field_products.*', 'fp.*', 'cfp.category_id')
+        ->select('field_products.name as field_products_name', 'fp.*', 'cfp.category_id')
         ->get();
 
         $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : null;
@@ -165,7 +165,7 @@ class ShoppingCartController extends Controller
 
         $field_products = FieldProduct::join('category_field_product as cfp', 'cfp.field_product_id', '=', 'field_products.id')
         ->join('field_values as fp', 'fp.field_product_id', '=', 'cfp.field_product_id')
-        ->select('field_products.*', 'fp.*', 'cfp.category_id')
+        ->select('field_products.name as field_products_name', 'fp.*', 'cfp.category_id')
         ->get();
 
         $shoppingCart = session()->has('shopping_cart.products') ? session('shopping_cart.products') : [];

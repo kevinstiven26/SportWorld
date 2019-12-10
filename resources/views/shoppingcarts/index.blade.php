@@ -12,8 +12,8 @@
               <!-- breadcrumb-->
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li aria-current="page" class="breadcrumb-item active">Shopping cart</li>
+                  <li class="breadcrumb-item"><a href="{{ route('inicio') }}">Inicio</a></li>
+                  <li aria-current="page" class="breadcrumb-item active">Carrito de compras</li>
                 </ol>
               </nav>
             </div>
@@ -22,16 +22,16 @@
               <div class="box">
                 <form method="POST" action="{{ route('quantity') }}">
                 @csrf
-                  <h1>Shopping cart</h1>
-                  <p class="text-muted">You currently have {{ count($shoppingCart) }} item(s) in your cart.</p>
+                  <h1>Carrito de Compras</h1>
+                  <p class="text-muted">Actualmente tienes {{ count($shoppingCart) }} producto(s) en tu carrito.</p>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
-                          <th colspan="2">Product</th>
+                          <th colspan="2">Producto</th>
                           <th></th>
-                          <th>Quantity</th>
-                          <th>Unit price</th>
+                          <th>Cantidad</th>
+                          <th>Precio unidad</th>
                           <th colspan="2">Total</th>
                         </tr>
                       </thead>
@@ -42,10 +42,12 @@
                           <td><a href="#">{{ $p->name }}</a></td>
                           <td>
                             @if($field_products->where('category_id', $p->category_id)->count() > 0)
+                                <b>{{ $field_products[0]['field_products_name']}}</b>
+                                <input name="field_products_name_{{ $p->id }}" type="hidden" value="{{ $field_products[0]['field_products_name'] }}"/>
                                 <select name="field_value_{{ $p->id }}">
                                     @foreach($field_products as $fp)
                                         @if($fp->category_id == $p->category_id)
-                                            <option value="{{ $fp->name }}" @if(isset($quantity['field_value_'.$p->id]) && $quantity["field_value_".$p->id] == $fp->name){{ 'selected' }}@endif>{{ $fp->name }}</option>
+                                            <option value="{{ $fp->name }}" @if(isset($quantity["field_value_".$p->id]) && $quantity["field_value_".$p->id] == $fp->name){{ 'selected' }}@endif>{{ $fp->name }}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -70,11 +72,11 @@
                   </div>
                   <!-- /.table-responsive-->
                   <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
-                    <div class="left"><a href="{{ route('product_list.index') }}" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
+                    <div class="left"><a href="{{ route('product_list.index') }}" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Continuar comprando</a></div>
                     <div class="right">
                     @if(isset($shoppingCart) && count($shoppingCart) > 0)
-                        <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Update cart</button>
-                        <a href="{{ route('orders.index') }} " class="btn btn-primary"> Proceed to checkout <i class="fa fa-chevron-right"></i></a>
+                        <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Actualizar carrito</button>
+                        <a href="{{ route('orders.index') }} " class="btn btn-primary"> Proceder al pago <i class="fa fa-chevron-right"></i></a>
                       @endif
                     </div>
                   </div>
@@ -84,7 +86,7 @@
               <div class="row same-height-row">
                 <div class="col-lg-3 col-md-6">
                   <div class="box same-height">
-                    <h3>You may also like these products</h3>
+                    <h3>Te podrían interesar estos productos</h3>
                   </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
@@ -138,23 +140,14 @@
             <div class="col-lg-3">
               <div id="order-summary" class="box">
                 <div class="box-header">
-                  <h3 class="mb-0">Order summary</h3>
+                  <h3 class="mb-0">Resumen Orden</h3>
                 </div>
-                <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
                 <div class="table-responsive">
                   <table class="table">
                     <tbody>
                       <tr>
-                        <td>Order subtotal</td>
+                        <td>Subtotal Orden</td>
                         <th>$ {{ number_format($total, 0, ',', '.') }}</th>
-                      </tr>
-                      <tr>
-                        <td>Shipping and handling</td>
-                        <th>$0.00</th>
-                      </tr>
-                      <tr>
-                        <td>Tax</td>
-                        <th>$0.00</th>
                       </tr>
                       <tr class="total">
                         <td>Total</td>
@@ -164,6 +157,7 @@
                   </table>
                 </div>
               </div>
+              <!--
               <div class="box">
                 <div class="box-header">
                   <h4 class="mb-0">Coupon code</h4>
@@ -174,10 +168,10 @@
                     <input type="text" class="form-control"><span class="input-group-append">
                       <button type="button" class="btn btn-primary"><i class="fa fa-gift"></i></button></span>
                   </div>
-                  <!-- /input-group-->
                 </form>
               </div>
             </div>
+            -->
             <!-- /.col-md-3-->
           </div>
           @endisset
