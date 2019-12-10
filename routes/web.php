@@ -34,6 +34,7 @@ Route::resource('field_products', 'FieldProduct\FieldProductController');
 Route::resource('shoppingcarts', 'ShoppingCart\ShoppingCartController');
 Route::resource('orders', 'Order\OrderController')->middleware('auth');
 Route::resource('orders.califications', 'Order\OrderCalificationController');
+Route::resource('orders2', 'Order\Order2Controller');
 Route::post('shoppingcarts/update', 'ShoppingCart\ShoppingCartController@updateQuantity')->name('quantity');
 
 Route::resource('category.field_product', 'Category\CategoryFieldProductController',['only'=>['index','create','store','destroy']]);

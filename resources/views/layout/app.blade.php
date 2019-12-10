@@ -139,6 +139,7 @@
                                         <li class="nav-item"><a href="{{ route('products.index')}}" class="nav-link">Productos</a></li>
                                         <li class="nav-item"><a href="{{ route('field_types.index')}}" class="nav-link">Tipo de Campos</a></li>
                                         <li class="nav-item"><a href="{{ route('field_products.index')}}" class="nav-link">Campos Productos</a></li>
+                                        <li class="nav-item"><a href="{{ route('orders2.index') }}" class="nav-link">Ordenes de Compra</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -182,9 +183,9 @@
             <div class="col-lg-4 col-md-6">
                 <h4 class="mb-3">Usuario</h4>
                 <ul class="list-unstyled">
-                @if(Auth::check()) 
+                @if(Auth::check())
                 <li>{{Auth::user()->email}}</li>
-                @else 
+                @else
                     <li><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>
                     <li><a href="{{ route('register') }}">Registrarse</a></li>
                 @endif
