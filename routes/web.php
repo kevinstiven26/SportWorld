@@ -17,11 +17,11 @@ Route::get('/', function () {
 */
 Route::get('/', function () {
     return view('index');
-});
+})->name('inicio');
 
 Route::resource('providers', 'Provider\ProviderController');
 Route::resource('customers', 'Customer\CustomerController');
-Route::resource('customers.orders', 'Customer\CustomerOrderController')->middleware('auth');
+Route::resource('customers.orders', 'Customer\CustomerOrderController')->middleware('auth.basic');
 Route::resource('categories', 'Category\CategoryController');
 Route::resource('products', 'Product\ProductController');
 /* Route::resource('product_list', 'Product\ProductListController',['except'=>['index']]); */

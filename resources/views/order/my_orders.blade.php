@@ -12,8 +12,8 @@
               <!-- breadcrumb-->
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li aria-current="page" class="breadcrumb-item active">My orders</li>
+                  <li class="breadcrumb-item"><a href="{{ route('inicio') }}">Inicio</a></li>
+                  <li aria-current="page" class="breadcrumb-item active">Mis Ordenes</li>
                 </ol>
               </nav>
             </div>
@@ -24,10 +24,10 @@
               -->
               <div class="card sidebar-menu">
                 <div class="card-header">
-                  <h3 class="h4 card-title">Customer section</h3>
+                  <h3 class="h4 card-title">Sección Cliente</h3>
                 </div>
                 <div class="card-body">
-                  <ul class="nav nav-pills flex-column"><a href="{{ route('customers.orders.index', $customer->id) }}" class="nav-link active"><i class="fa fa-list"></i> My orders</a><a href="#" class="nav-link"><i class="fa fa-heart"></i> My wishlist</a><a href="{{ route('customers.show', $customer->id) }}" class="nav-link"><i class="fa fa-user"></i> My account</a><a href="index.html" class="nav-link"><i class="fa fa-sign-out"></i> Logout</a></ul>
+                  <ul class="nav nav-pills flex-column"><a href="{{ route('customers.orders.index', $customer->id) }}" class="nav-link active"><i class="fa fa-list"></i> Mis Ordenes</a><!-- <a href="#" class="nav-link"><i class="fa fa-heart"></i> My wishlist</a> --><a href="{{ route('customers.show', $customer->id) }}" class="nav-link"><i class="fa fa-user"></i> Mi Cuenta</a><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"class="nav-link"><i class="fa fa-sign-out"></i> Cerrar Sesión</a> <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form></ul>
                 </div>
               </div>
               <!-- /.col-lg-3-->
@@ -35,19 +35,18 @@
             </div>
             <div id="customer-orders" class="col-lg-9">
               <div class="box">
-                <h1>My orders</h1>
-                <p class="lead">Your orders on one place.</p>
-                <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+                <h1>Mis Ordenes</h1>
+                <p class="lead">Todas tus ordenes en un solo lugar.</p>
                 <hr>
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>Order</th>
-                        <th>Date</th>
+                        <th>Orden</th>
+                        <th>Fecha</th>
                         <th>Total</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -56,40 +55,10 @@
                             <th># {{ $order->id }}</th>
                             <td>{{ $order->date }}</td>
                             <td>$ {{ number_format($order->total, 0, ',', '.') }}</td>
-                            <td><span class="badge badge-info">Being prepared</span></td>
-                            <td><a href="{{ route('customers.orders.show', ['customer' => $customer->id, 'order' => $order->id ]) }}" class="btn btn-primary btn-sm">View</a></td>
+                            <td><span class="badge badge-info">En Entrega</span></td>
+                            <td><a href="{{ route('customers.orders.show', ['customer' => $customer->id, 'order' => $order->id ]) }}" class="btn btn-primary btn-sm">Ver Detalle</a></td>
                         </tr>
                     @endforeach
-                    <!--
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-info">Being prepared</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-success">Received</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-danger">Cancelled</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      <tr>
-                        <th># 1735</th>
-                        <td>22/06/2013</td>
-                        <td>$ 150.00</td>
-                        <td><span class="badge badge-warning">On hold</span></td>
-                        <td><a href="customer-order.html" class="btn btn-primary btn-sm">View</a></td>
-                      </tr>
-                      -->
                     </tbody>
                   </table>
                 </div>
