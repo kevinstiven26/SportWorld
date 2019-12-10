@@ -8,7 +8,7 @@ class Calification extends Model
 {
     protected $fillable = [
         'calification',
-        'observation',
+        'observations',
         'order_id',
     ];
 }
