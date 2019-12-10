@@ -71,12 +71,17 @@ class CustomerOrderController extends Controller
             ->where('orders.id', '=', $order->id)
             ->get();
 
+        $califications = Order::join('califications as c', 'orders.id', '=', 'c.order_id')
+        ->where('orders.id', '=', $order->id)
+        ->select('c.*')
+        ->get();
+
         $total = 0;
         foreach ($products as $p) {
             $total += ($p->price * $p->quantity);
         }
 
-        return view('order.detail', compact('customer', 'products', 'order', 'total'));
+        return view('order.detail', compact('customer', 'products', 'order', 'total', 'califications'));
     }
 
     /**
