@@ -7,7 +7,6 @@ use App\ShoppingCart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
-use App\FieldProduct;
 
 class ShoppingCartController extends Controller
 {

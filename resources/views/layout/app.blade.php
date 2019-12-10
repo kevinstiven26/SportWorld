@@ -32,8 +32,8 @@
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
                             @guest
-                                <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                                <li class="list-inline-item"><a href="{{ route('register') }}">Register</a></li>
+                                <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>
+                                <li class="list-inline-item"><a href="{{ route('register') }}">Registrarse</a></li>
                             @else
                                 <li class="list-inline-item">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -42,7 +42,7 @@
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item nav-link" href=" {{  route('customers.show', App\Customer::where('user_id', '=', Auth::user()->id)->first()->id) }}">
-                                            <i class="fa fa-user"></i> My Account
+                                            <i class="fa fa-user"></i> Mi Cuenta
                                         </a>
                                         <a class="dropdown-item nav-link" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -56,8 +56,8 @@
                                     </div>
                                 </li>
                             @endguest
-                                <li class="list-inline-item"><a href="">Contact</a></li>
-                                <li class="list-inline-item"><a href="#">Recently viewed</a></li>
+                                {{-- <li class="list-inline-item"><a href="">Contact</a></li> --}}
+                                {{-- <li class="list-inline-item"><a href="#">Recently viewed</a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -66,14 +66,14 @@
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Customer login</h5>
+                            <h5 class="modal-title">Inicio de Sesión</h5>
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                         </div>
                         <div class="modal-body">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <input id="email" type="email" placeholder="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" placeholder="correo" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -81,14 +81,14 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input id="password" type="password" placeholder="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <input id="password" type="password" placeholder="contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 </div>
                                 <p class="text-center">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i>{{ __('Login') }}</button>
                                 </p>
                             </form>
-                            <p class="text-center text-muted">Not registered yet?</p>
-                            <p class="text-center text-muted"><a href="{{ route('register') }}"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access to special discounts and much more!</p>
+                            <p class="text-center text-muted">No estas registrado Todavía?</p>
+                            <p class="text-center text-muted"><a href="{{ route('register') }}"><strong>Regístrese ahora</strong></a>! Es fácil y se realiza en 1 minuto y le da acceso a descuentos especiales y mucho más.!</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,6 @@
                     </ul>
                 </li>
                 @endforeach
-
                 @if(Auth::check() && Auth::user()->email ==  'administrador@gmail.com')
                     <li class="nav-item dropdown menu-large">
                         <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Administración<b class="caret"></b></a>
@@ -180,60 +179,40 @@
     <div id="footer">
         <div class="container">
             <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <h4 class="mb-3">Pages</h4>
+            <div class="col-lg-4 col-md-6">
+                <h4 class="mb-3">Usuario</h4>
                 <ul class="list-unstyled">
-                <li><a href="text.html">About us</a></li>
-                <li><a href="text.html">Terms and conditions</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact us</a></li>
-                </ul>
-                <hr>
-                <h4 class="mb-3">User section</h4>
-                <ul class="list-unstyled">
-                <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                <li><a href="register.html">Regiter</a></li>
+                @if(Auth::check()) 
+                <li>{{Auth::user()->email}}</li>
+                @else 
+                    <li><a href="#" data-toggle="modal" data-target="#login-modal">Iniciar sesión</a></li>
+                    <li><a href="{{ route('register') }}">Registrarse</a></li>
+                @endif
                 </ul>
             </div>
             <!-- /.col-lg-3-->
-            <div class="col-lg-3 col-md-6">
-                <h4 class="mb-3">Top categories</h4>
-                <h5>Men</h5>
-                <ul class="list-unstyled">
-                <li><a href="category.html">T-shirts</a></li>
-                <li><a href="category.html">Shirts</a></li>
-                <li><a href="category.html">Accessories</a></li>
-                </ul>
-                <h5>Ladies</h5>
-                <ul class="list-unstyled">
-                <li><a href="category.html">T-shirts</a></li>
-                <li><a href="category.html">Skirts</a></li>
-                <li><a href="category.html">Pants</a></li>
-                <li><a href="category.html">Accessories</a></li>
-                </ul>
+            <div class="col-lg-4 col-md-6">
+                <h4 class="mb-3">Categorías</h4>
+                @if(session()->has('menu.padres'))
+                @foreach (session()->get('menu.padres') as $padre )
+                <h5>{{ $padre->name }}</h5>
+                    <ul class="list-unstyled">
+                        @foreach (session()->get('menu2.hijos') as $hijo )
+                            @if($hijo->category == $padre->id)
+                                <li><a href="{{ route('product_list.index', ['category' => $hijo->id])}}">{{$hijo->name}}</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </li>
+                @endforeach
+                @endif
             </div>
             <!-- /.col-lg-3-->
-            <div class="col-lg-3 col-md-6">
-                <h4 class="mb-3">Where to find us</h4>
-                <p><strong>Obaju Ltd.</strong><br>13/25 New Avenue<br>New Heaven<br>45Y 73J<br>England<br><strong>Great Britain</strong></p><a href="contact.html">Go to contact page</a>
+            <div class="col-lg-4 col-md-6">
+                <h4 class="mb-3">Donde encontrarnos</h4>
+                <p><strong>Sports World.</strong><br>Cra 63b #34-25<br>Medellín - Antioquia<br><strong>Colombia</strong></p>
                 <hr class="d-block d-md-none">
             </div>
-            <!-- /.col-lg-3-->
-            <div class="col-lg-3 col-md-6">
-                <h4 class="mb-3">Get the news</h4>
-                <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                <form>
-                <div class="input-group">
-                    <input type="text" class="form-control"><span class="input-group-append">
-                    <button type="button" class="btn btn-outline-secondary">Subscribe!</button></span>
-                </div>
-                <!-- /input-group-->
-                </form>
-                <hr>
-                <h4 class="mb-3">Stay in touch</h4>
-                <p class="social"><a href="#" class="facebook external"><i class="fa fa-facebook"></i></a><a href="#" class="twitter external"><i class="fa fa-twitter"></i></a><a href="#" class="instagram external"><i class="fa fa-instagram"></i></a><a href="#" class="gplus external"><i class="fa fa-google-plus"></i></a><a href="#" class="email external"><i class="fa fa-envelope"></i></a></p>
-            </div>
-            <!-- /.col-lg-3-->
             </div>
             <!-- /.row-->
         </div>

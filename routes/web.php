@@ -1,5 +1,7 @@
 <?php
 
+use App\Product;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +18,8 @@ Route::get('/', function () {
 });
 */
 Route::get('/', function () {
-    return view('index');
+    $products = Product::orderBy('created_at')->limit(5)->get();
+    return view('index',compact('products'));
 })->name('inicio');
 
 Route::resource('providers', 'Provider\ProviderController');

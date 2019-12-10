@@ -1,4 +1,4 @@
-@extends('layout.app');
+@extends('layout.app')
 @section('content')
 <div id="all">
     <div id="content">
@@ -8,8 +8,8 @@
             <!-- breadcrumb-->
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li aria-current="page" class="breadcrumb-item active">Ladies</li>
+                <li class="breadcrumb-item"><a href="{{ route('product_list.index')}}">Inicio</a></li>
+                <li aria-current="page" class="breadcrumb-item active">@if(request()->has('category')) {{ App\Category::where('id','=',request()->query()['category'])->first()->name }} @else  @endif</li>
               </ol>
             </nav>
           </div>
@@ -61,12 +61,12 @@
                 <div class="col-md-12 col-lg-7 products-number-sort">
                   <form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
                     <div class="products-number"><strong>Mostrar</strong><a href="{{ route('product_list.index', ['perpage' => 12])}}" class="btn btn-sm @if($products->perPage()==12){{ 'btn-primary'}}@else {{ 'btn-outline-secondary'}} @endif">12</a><a href="{{ route('product_list.index', ['perpage' => 24])}}" class="btn btn-sm @if($products->perPage()==24){{ 'btn-primary'}}@else {{ 'btn-outline-secondary'}} @endif">24</a><a href="{{ route('product_list.index', ['perpage' => $products->total()])}}" class="btn btn-sm @if($products->perPage()==$products->total()){{ 'btn-primary'}}@else {{ 'btn-outline-secondary'}} @endif">Todos</a></div>
-                    <div class="products-sort-by mt-2 mt-lg-0"><strong>Ordenar por</strong>
+                    {{-- <div class="products-sort-by mt-2 mt-lg-0"><strong>Ordenar por</strong>
                       <select name="sort-by" class="form-control">
                         <option>Nombre</option>
                         <option>Precio</option>
                       </select>
-                    </div>
+                    </div> --}}
                   </form>
                 </div>
               </div>
