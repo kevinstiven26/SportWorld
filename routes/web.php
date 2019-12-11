@@ -17,10 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
-Route::get('/', function () {
-    $products = Product::orderBy('created_at')->limit(5)->get();
-    return view('index',compact('products'));
-})->name('inicio');
+Route::get('/', 'IndexController@index')->name('inicio');
+
+
 
 Route::resource('providers', 'Provider\ProviderController');
 Route::resource('customers', 'Customer\CustomerController');
