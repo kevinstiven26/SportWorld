@@ -73,7 +73,6 @@
                         <form method="POST" action="{{ route('orders.califications.store', $order->id) }}">
                           @csrf
                         <div class="row">
-                            <input name="customerId" type="hidden" value="{{ $customer->id }}" />
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="password_old">Calificación</label>

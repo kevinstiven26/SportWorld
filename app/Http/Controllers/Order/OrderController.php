@@ -157,7 +157,9 @@ class OrderController extends Controller
                 }
 
                 $orders = Order::where('customer_id', '=', $customerId)->get();
-                session()->flush();
+                //session()->flush();
+                session()->forget('shopping_cart.products');
+                session()->forget('quantity');
                 return redirect()->route('customers.orders.index', $customerId);
             break;
 
